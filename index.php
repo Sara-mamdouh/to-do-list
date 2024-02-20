@@ -24,6 +24,31 @@ if(isset($_POST['submit'])){
 }
 $tasks = json_decode(file_get_contents("tasks.json"),true);
 
+if(isset($_POST["remove-btn"])){
+  $id_task=$_POST['id-product-remove'];
+// get array index to delete
+$arr_index = array();
+foreach ($tasks as $key => $task)
+{
+  // echo $key;
+    if ($task['id'] == $id_task)
+    {
+        $arr_index[] = $key;
+    }
+}
+//  var_dump($arr_index);
+
+
+foreach ($arr_index as $i)
+{
+    unset($tasks[$i]);
+}
+
+$tasks = [...$tasks];
+
+file_put_contents('./tasks.json', json_encode($tasks, JSON_PRETTY_PRINT));
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +77,14 @@ $tasks = json_decode(file_get_contents("tasks.json"),true);
           <?php if (--$count < 1){
                 break;}
               ?>
-        <li><?php echo $input ?> <i class="fa-regular fa-trash-can"></i></li>
+        <li><?php echo $input ?> 
+            <form action="" method="post" class ="remove-form">
+              <input type="hidden" name="id-product-remove" value="<?php echo $task['id'] ?>">
+              <button type="submit" name="remove-btn" class="btn-remove"> <i class="fa-regular fa-trash-can"></i> </button>
+              
+            </form>
+          
+        </li>
         <?php endforeach; ?> 
 
         <?php endforeach; ?> 
