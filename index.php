@@ -1,4 +1,6 @@
 <?php
+require_once './config.php';
+authenticated();
 if(isset($_POST['submit'])){
   $originalPostCount = count($_POST);
   
@@ -37,15 +39,11 @@ foreach ($tasks as $key => $task)
     }
 }
 //  var_dump($arr_index);
-
-
 foreach ($arr_index as $i)
 {
     unset($tasks[$i]);
 }
-
 $tasks = [...$tasks];
-
 file_put_contents('./tasks.json', json_encode($tasks, JSON_PRETTY_PRINT));
 
 }
@@ -62,7 +60,7 @@ file_put_contents('./tasks.json', json_encode($tasks, JSON_PRETTY_PRINT));
 </head>
 <body>
   <div class="container">
-    <h1>to do list</h1>
+    <h1>to-do list</h1>
     <div class="inputs">
       <form action="" method="post"> 
         <input type="text" name="task" id="" placeholder="Enter your task">
