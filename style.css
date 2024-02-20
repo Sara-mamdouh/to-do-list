@@ -26,3 +26,20 @@ input {
   font-size: 19px;
   padding: 10px;
 }
+.text ul {
+  position: relative;
+  color: white;
+  /* padding: 7px; */
+  text-align: left;
+  padding: 0;
+}
+.text ul li {
+  background-color: rgb(5, 31, 31);
+  margin: 10px 0;
+  font-size: 19px;
+
+  padding: 10px 20px;
+  /* position: absolute; */
+  /* left: 10px; */
+  cursor: pointer;
+}

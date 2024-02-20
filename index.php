@@ -11,7 +11,7 @@ if(isset($_POST['submit'])){
       $first_record = array($new_message);
       $data_to_save = $first_record;
    }else{
-      $old_records = json_decode(file_get_contents("../products.json"));
+      $old_records = json_decode(file_get_contents("tasks.json"));
       array_push($old_records ,$new_message);
       $data_to_save = $old_records;
    }
@@ -22,6 +22,8 @@ if(isset($_POST['submit'])){
     // ioiiuniui
   }
 }
+$tasks = json_decode(file_get_contents("tasks.json"),true);
+
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +31,7 @@ if(isset($_POST['submit'])){
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="fontawesome.min.css"/>
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
@@ -42,7 +45,19 @@ if(isset($_POST['submit'])){
       </form>     
     </div>
     <div class="text">
+      <ul>
+      <?php foreach($tasks as $task): ?> 
+        <?php  $count = count($task);?>
+        <?php foreach($task as $input): ?>    
+          <?php if (--$count < 1){
+                break;}
+              ?>
+        <li><?php echo $input ?></li>
+        <?php endforeach; ?> 
 
+        <?php endforeach; ?> 
+
+        </ul>
     </div>
   </div>
 </body>
